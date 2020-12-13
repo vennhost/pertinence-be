@@ -35,7 +35,7 @@ router.post("/register", async (req, res) => {
   try {
     const user = await User.register({ ...req.body }, req.body.password);
     const token = getToken({ _id: user._id });
-    res.status("success").send({ access_token: token, user: user });
+    res.status(200).send({ access_token: token, user: user });
   } catch (error) {
     res.send(error);
   }
@@ -44,7 +44,7 @@ router.post("/register", async (req, res) => {
 router.post("/login", passport.authenticate("local"), async (req, res) => {
   try {
     const token = await getToken({ _id: req.user._id });
-    res.status("success").send({
+    res.status(200).send({
       acess_token: token,
       user: req.user,
     });
